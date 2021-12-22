@@ -1,4 +1,4 @@
 export class UpdateBrandDto {
-    favoriteFoods: string[]
-    age: number;
+    name: string
+    slug: string;
 }

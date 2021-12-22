@@ -16,7 +16,7 @@ export class BrandsRepository {
         return this.brandModel.find(brandFilterQuery)
     }
 
-    async create(brand): Promise<Brand> {
+    async create(brand: Brand): Promise<Brand> {
         const newUser = new this.brandModel(brand);
         return newUser.save()
     }

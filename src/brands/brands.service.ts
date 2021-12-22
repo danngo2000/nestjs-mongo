@@ -1,5 +1,4 @@
 import { Injectable } from "@nestjs/common";
-import { v4 as uuidv4 } from 'uuid';
 import { UpdateBrandDto } from "./dto/update-brand.dto";
 
 import { Brand } from "./schemas/brand.schema";
@@ -17,8 +16,9 @@ export class BrandsService {
         return this.brandsRepository.find({});
     }
 
-    async createBrand(name: string): Promise<Brand> {
-        return this.brandsRepository.create({ name })
+    async createBrand(body: any): Promise<Brand> {
+        const { name, slug, name_lower, description } = body
+        return this.brandsRepository.create({ name, slug, name_lower, description })
     }
 
     async updateBrand(id: string, brandUpdates: UpdateBrandDto): Promise<Brand> {

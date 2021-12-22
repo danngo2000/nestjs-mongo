@@ -6,13 +6,16 @@ export type BrandDocument = Brand & Document;
 @Schema()
 export class Brand {
     @Prop()
-    name: string;
+    name: string
 
     @Prop()
-    age: number;
+    slug: string
 
-    @Prop([String])
-    favoriteFoods: string[]
+    @Prop()
+    name_lower: string
+
+    @Prop()
+    description: string
 }
 
 export const BrandSchema = SchemaFactory.createForClass(Brand);

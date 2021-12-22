@@ -1,12 +1,10 @@
-import { Body, Controller, Get, Param, Patch, Post, Req } from '@nestjs/common';
-import { UpdateBrandDto } from './dto/update-brand.dto';
+import { Body, Controller, Get, Param, Patch, Post, UsePipes, ValidationPipe } from '@nestjs/common';
 
 import { Brand } from './schemas/brand.schema';
 import { BrandsService } from './brands.service';
 
-class BodyDTO {
-  readonly name: string
-}
+import { CreateBrandDto } from './dto/create-brand.dto';
+import { UpdateBrandDto } from './dto/update-brand.dto';
 
 @Controller('brands')
 export class BrandsController {
@@ -23,9 +21,10 @@ export class BrandsController {
   }
 
   @Post()
-  async createBrand(@Body() body: BodyDTO): Promise<Brand> {
+  @UsePipes(new ValidationPipe({ transform: true }))
+  async createBrand(@Body() body: CreateBrandDto) {
     console.log("createBrandDto", body);
-    return this.brandsService.createBrand(body.name)
+    return this.brandsService.createBrand(body)
   }
 
   @Patch(':id')
